@@ -24,27 +24,35 @@ with open(cfg.train_file) as f:
 
 words_vocab = sorted(set(words))
 word_dict = {'UNK': 0, 'PAD': 1}
+inv_word_dict = {0:'UNK', 1:'PAD'}
 
 for i, item in enumerate(words_vocab):
     word_dict[item] = i + 2
+    inv_word_dict[i+2] = item
 
 # Make slot tag dict 
 slot_dict = {}
+inv_slot_dict = {} 
 
 with open(cfg.vocab_slot_file) as f:
 
     for i, line in enumerate(f.readlines()):
         slot_dict[line.strip()] = i
+        inv_slot_dict[i] = line.strip()
+        
+        
 
 
 # print(slot_dict)
 
 # Make intent dict 
 intent_dict = {}
+inv_intent_dict = {} 
 
 with open(cfg.vocab_intent_file) as f:
     for i, line in enumerate(f.readlines()):
         intent_dict[line.strip()] = i
+        inv_intent_dict[i] = line.strip()
 
 # print(intent_dict)
 
